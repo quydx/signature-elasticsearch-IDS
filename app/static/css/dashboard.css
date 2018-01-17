@@ -1,0 +1,22 @@
+html {
+    font-family: "Times New Roman", Georgia, Serif;
+}
+table, td, th {    
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 15px;
+}
+li {
+	display: inline-block;;
+	width: 100px;
+	height: 100px;
+	border: 1px solid #ddd;
+}
