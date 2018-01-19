@@ -10,7 +10,7 @@ from elasticsearch import Elasticsearch
 def index():
     es = Elasticsearch(['192.168.158.74:9200']) 
     search_index="suricataids-bd-alert-2018.01.19"
-    res = es.search(index=search_index, body={"query": {"match_all": {}}}, size=1000)
+    res = es.search(index=search_index, body={"query": {"match_all": {}}}, size=100)
     signatures=[]
     all_hits = res['hits']['hits']
     total = len(all_hits)

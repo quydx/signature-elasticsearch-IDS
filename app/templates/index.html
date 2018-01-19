@@ -3,12 +3,12 @@
 <head>
     <title> Elasticsearch Dashboard </title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard.css')}}">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>   
 </head>
 
-<body ng-app="es-app">
+<body ng-app="esApp">
     <h2> Elasticsearch Sinature Dashboard</h2>
-    <div ng-controller="select-ctrl">
+    <div ng-controller="selectCtrl">
 	    Get {{total}} document from index {{ search_index }}
 	    <h4>Select sinature display</h4>
 	    <ul>
@@ -50,11 +50,10 @@
 	    </table>
 	</div>
 	<script type="text/javascript">
-		angular.module('es-app', [])
-		.controller('select-ctrl',['$scope','$window', function($scope){
-			$scope.count = 0;
+		angular.module('esApp', [])
+		.controller('selectCtrl',['$scope','$window', function($scope, $window){
 			$scope.alert_ch = function(){
-				$window.alert("a select change !!")
+			    $window.alert("hehe");
 			}
 		}]);
 	</script>
