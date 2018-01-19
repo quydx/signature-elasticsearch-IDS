@@ -15,9 +15,9 @@
 		{% for sig in signatures  %}
 		<li>
 		<span> {{ sig }}</span> 
-		    <select ng-model="selectModel" ng-change="alert_ch()"> 
-			<option selected>NO</option>
-			<option>YES</option>
+		    <select ng-model="selectSignature" ng-change="alert_ch()"> 
+				<option selected value="no">NO</option>
+				<option value="yes">YES</option>
 		    </select>
 		</li>
 		{% endfor %}
@@ -51,9 +51,9 @@
 	</div>
 	<script type="text/javascript">
 		angular.module('esApp', [])
-		.controller('selectCtrl',['$scope', function($scope){
+		.controller('selectCtrl',['$scope', '$window', function($scope, $window){
 			$scope.alert_ch = function(){
-			    console.log(1111);
+			    console.log(selectSignature);
 			};
 		}]);
 	</script>
