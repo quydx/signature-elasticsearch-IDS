@@ -29,9 +29,11 @@
 	    <th>SIGNATURE</th>
 	    <th>ENABLE WARNING</th>
 	</tr>
+	{% set i = 1 %}
 	{% for hit in all_hits %}	
+	
 	<tr>
-	    <td> 99</td>
+	    <td>{{i}}</td>
 	    <td>{{ search_index }}</td>
 	    <td>{{ hit['_source']['timestamp'] }}</td>
 	    <td>{{ hit['_source']['alert']['signature'] }}</td>
@@ -42,6 +44,7 @@
 		</select>
 	    </td>
 	</tr>
+	{% set i= i+1%}
 	{% endfor %}
     </table>
 </body>
