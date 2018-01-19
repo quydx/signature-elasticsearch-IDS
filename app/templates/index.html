@@ -3,7 +3,7 @@
 <head>
     <title> Elasticsearch Dashboard </title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard.css')}}">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>   
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 </head>
 
 <body ng-app="esApp">
@@ -15,7 +15,7 @@
 		{% for sig in signatures  %}
 		<li>
 		<span> {{ sig }}</span> 
-		    <select ng-change="alert_ch()"> 
+		    <select ng-model="selectModel" ng-change="alert_ch()"> 
 			<option selected>NO</option>
 			<option>YES</option>
 		    </select>
@@ -51,10 +51,10 @@
 	</div>
 	<script type="text/javascript">
 		angular.module('esApp', [])
-		.controller('selectCtrl',['$scope','$window', function($scope, $window){
+		.controller('selectCtrl',['$scope', function($scope){
 			$scope.alert_ch = function(){
-			    $window.alert("hehe");
-			}
+			    console.log(1111);
+			};
 		}]);
 	</script>
 </body>
