@@ -6,46 +6,57 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 </head>
 
-<body>
-    <h2> Elasticsearch Sinature Dashboard 111</h2>
-    Get {{total}} document from index {{ search_index }}
-    <h4>Select sinature display</h4>
-    <ul>
-	{% for sig in signatures  %}
-	<li>
-	<span> {{ sig }}</span> 
-	    <select> 
-		<option selected>NO</option>
-		<option>YES</option>
-	    </select>
-	</li>
-	{% endfor %}
-    </ul>
-    <table>
-	<tr>
-	    <th>STT</th>
-	    <th>INDEX</th>
-	    <th>TIMESTAMP</th>
-	    <th>SIGNATURE</th>
-	    <th>ENABLE WARNING</th>
-	</tr>
-	{% set i = 1 %}
-	{% for hit in all_hits %}	
-	
-	<tr>
-	    <td>{{i}}</td>
-	    <td>{{ search_index }}</td>
-	    <td>{{ hit['_source']['timestamp'] }}</td>
-	    <td>{{ hit['_source']['alert']['signature'] }}</td>
-	    <td>
-		<select>
-		    <option value="yes">yes</option>
-		    <option value="no">no</option>
-		</select>
-	    </td>
-	</tr>
-	{% set i= i+1%}
-	{% endfor %}
-    </table>
+<body ng-app="es-app">
+    <h2> Elasticsearch Sinature Dashboard</h2>
+    <div ng-controller="select-ctrl">
+	    Get {{total}} document from index {{ search_index }}
+	    <h4>Select sinature display</h4>
+	    <ul>
+		{% for sig in signatures  %}
+		<li>
+		<span> {{ sig }}</span> 
+		    <select ng-change="alert_ch()"> 
+			<option selected>NO</option>
+			<option>YES</option>
+		    </select>
+		</li>
+		{% endfor %}
+	    </ul>
+	    <table>
+		<tr>
+		    <th>STT</th>
+		    <th>INDEX</th>
+		    <th>TIMESTAMP</th>
+		    <th>SIGNATURE</th>
+		    <th>ENABLE WARNING</th>
+		</tr>
+		{% set i = 1 %}
+		{% for hit in all_hits %}	
+		
+		<tr>
+		    <td>{{i}}</td>
+		    <td>{{ search_index }}</td>
+		    <td>{{ hit['_source']['timestamp'] }}</td>
+		    <td>{{ hit['_source']['alert']['signature'] }}</td>
+		    <td>
+			<select>
+			    <option value="yes">yes</option>
+			    <option value="no">no</option>
+			</select>
+		    </td>
+		</tr>
+		{% set i= i+1%}
+		{% endfor %}
+	    </table>
+	</div>
+	<script type="text/javascript">
+		angular.module('es-app', [])
+		.controller('select-ctrl',['$scope','$window', function($scope){
+			$scope.count = 0;
+			$scope.alert_ch = function(){
+				$window.alert("a select change !!")
+			}
+		}]);
+	</script>
 </body>
 </html>
