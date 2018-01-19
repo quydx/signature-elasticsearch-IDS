@@ -12,11 +12,9 @@ table {
 }
 
 th, td {
-    padding: 15px;
+    padding: 2px;
 }
 li {
-	display: inline-block;;
-	width: 100px;
-	height: 100px;
-	border: 1px solid #ddd;
+    height:20px;
+    margin:5px;
 }

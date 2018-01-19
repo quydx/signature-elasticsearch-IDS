@@ -3,29 +3,38 @@
 <head>
     <title> Elasticsearch Dashboard </title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 </head>
 
 <body>
     <h2> Elasticsearch Sinature Dashboard 111</h2>
+    Get {{total}} document from index {{ search_index }}
     <h4>Select sinature display</h4>
     <ul>
+	{% for sig in signatures  %}
 	<li>
-	    <p>signature 1</p> <select> <option>yes</option></select>
+	<span> {{ sig }}</span> 
+	    <select> 
+		<option selected>NO</option>
+		<option>YES</option>
+	    </select>
 	</li>
-	<li></li>
-	<li></li>
+	{% endfor %}
     </ul>
     <table>
 	<tr>
 	    <th>STT</th>
-	    <th>LOG NAME</th>
+	    <th>INDEX</th>
+	    <th>TIMESTAMP</th>
 	    <th>SIGNATURE</th>
 	    <th>ENABLE WARNING</th>
 	</tr>
+	{% for hit in all_hits %}	
 	<tr>
-	    <td>1</td>
-	    <td>Security</td>
-	    <td>Alert</td>
+	    <td> 99</td>
+	    <td>{{ search_index }}</td>
+	    <td>{{ hit['_source']['timestamp'] }}</td>
+	    <td>{{ hit['_source']['alert']['signature'] }}</td>
 	    <td>
 		<select>
 		    <option value="yes">yes</option>
@@ -33,6 +42,7 @@
 		</select>
 	    </td>
 	</tr>
+	{% endfor %}
     </table>
 </body>
 </html>

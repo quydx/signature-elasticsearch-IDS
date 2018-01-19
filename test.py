@@ -2,12 +2,19 @@ from datetime import datetime
 from elasticsearch import Elasticsearch 
 from pprint import pprint
 
-es = Elasticsearch(['localhost:9200'])
+es = Elasticsearch(['192.168.158.74:9200'])
 
-res = es.search(index="suricata-bd-alert-*", body={"query": {"match_all": {}}} , filter_path=['hits.hits._index'])
-print("Got %d Hits:" % res['hits']['total'])
-# for hit in res['hits']['hits']:
-#     print("%(timestamp)s %(author)s: %(text)s" % hit["_source"])
+res = es.search(index="suricataids-bd-alert-2018.01.19", body={"query": {"match_all": {}}}, size=10)
+signatures=[]
+all_hits = res['hits']['hits']
+print("Get total %d document from elasticsearch" % len(all_hits) )
+
+for hit in all_hits:
+    alert_obj = hit['_source']['alert']
+    #print("Signature = %s"% alert_obj['signature'])
+    if alert_obj['signature'] not in signatures:
+	signatures.append(alert_obj['signature'])
+pprint(signatures)
 
 
 
