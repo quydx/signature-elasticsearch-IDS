@@ -12,3 +12,24 @@ Traceback (most recent call last):
   File "/root/dashboard/app/views.py", line 4, in <module>
     from elasticsearch import elasticsearch
 ImportError: cannot import name elasticsearch
+ * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 711-845-212
+192.168.148.103 - - [19/Jan/2018 14:44:46] "GET / HTTP/1.1" 200 -
+192.168.148.103 - - [19/Jan/2018 14:44:50] "GET /favicon.ico HTTP/1.1" 404 -
+192.168.148.103 - - [19/Jan/2018 14:59:15] "GET / HTTP/1.1" 200 -
+192.168.148.103 - - [19/Jan/2018 14:59:15] "GET /static/css/dashboard.css HTTP/1.1" 304 -
+192.168.148.103 - - [19/Jan/2018 15:00:26] "GET / HTTP/1.1" 200 -
+192.168.148.103 - - [19/Jan/2018 15:00:26] "GET /static/css/dashboard.css HTTP/1.1" 304 -
+192.168.148.103 - - [20/Jan/2018 03:45:57] "GET / HTTP/1.1" 200 -
+192.168.148.103 - - [20/Jan/2018 03:45:57] "GET /static/css/dashboard.css HTTP/1.1" 200 -
+192.168.148.103 - - [20/Jan/2018 03:45:58] "GET /favicon.ico HTTP/1.1" 404 -
+192.168.148.103 - - [20/Jan/2018 03:46:24] "GET / HTTP/1.1" 200 -
+192.168.148.103 - - [20/Jan/2018 03:46:24] "GET /static/css/dashboard.css HTTP/1.1" 200 -
+192.168.148.103 - - [20/Jan/2018 03:47:05] "GET / HTTP/1.1" 200 -
+192.168.148.103 - - [20/Jan/2018 03:47:05] "GET /static/css/dashboard.css HTTP/1.1" 200 -
+192.168.148.103 - - [20/Jan/2018 03:48:02] "GET / HTTP/1.1" 200 -
+192.168.148.103 - - [20/Jan/2018 03:48:03] "GET /static/css/dashboard.css HTTP/1.1" 200 -
+192.168.148.103 - - [20/Jan/2018 03:50:33] "GET / HTTP/1.1" 200 -
+192.168.148.103 - - [20/Jan/2018 03:50:33] "GET /static/css/dashboard.css HTTP/1.1" 200 -

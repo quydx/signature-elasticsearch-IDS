@@ -15,7 +15,7 @@
 		{% for sig in signatures  %}
 		<li>
 		<span> {{ sig }}</span> 
-		    <select ng-model="selectSignature" ng-change="alert_ch()"> 
+		    <select name="{{ sig }}" ng-model="selectSignature" ng-change="alert_ch()"> 
 				<option selected value="no">NO</option>
 				<option value="yes">YES</option>
 		    </select>
@@ -33,11 +33,11 @@
 		{% set i = 1 %}
 		{% for hit in all_hits %}	
 		
-		<tr>
+		<tr class="doc_row">
 		    <td>{{i}}</td>
 		    <td>{{ search_index }}</td>
 		    <td>{{ hit['_source']['timestamp'] }}</td>
-		    <td>{{ hit['_source']['alert']['signature'] }}</td>
+		    <td class="sinature">{{ hit['_source']['alert']['signature'] }}</td>
 		    <td>
 			<select>
 			    <option value="yes">yes</option>
@@ -51,9 +51,11 @@
 	</div>
 	<script type="text/javascript">
 		angular.module('esApp', [])
-		.controller('selectCtrl',['$scope', '$window', function($scope, $window){
+		.controller('selectCtrl',['$scope', '$window','$document', function($scope, $window, $document){
 			$scope.alert_ch = function(){
-			    console.log(selectSignature);
+			   //all_rows = $document.find('.doc_row'); 
+			    all_rows = angular.element(document).find('tr.doc_row');
+			   console.log(all_rows.length);
 			};
 		}]);
 	</script>
