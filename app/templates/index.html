@@ -13,13 +13,11 @@
 	    Get {{total}} document from index {{ search_index }}
 	    <h4>Select sinature display</h4>
 	    <ul>
-		<!-- {% for sig in signatures  %} -->
+		{% for sig in signatures  %}
 		<li>
-		    <input class="sinature_select" type="checkbox" name="A"><span> A</span> 
-		    <input class="sinature_select" type="checkbox" name="B"><span> B</span> 
-		    <input class="sinature_select" type="checkbox" name="C"><span> C</span> 
+		    <input class="sinature_select" type="checkbox" name="{{sig}}"><span>{{sig}}</span> 
 		</li>
-		<!-- {% endfor %} -->
+		{% endfor %}
 	    </ul>
 	    <table>
 		<tr>
@@ -29,27 +27,13 @@
 		    <th>SIGNATURE</th>
 		    <th>ENABLE WARNING</th>
 		</tr>
-	<!-- 	{% set i = 1 %}
-		{% for hit in all_hits %}	 -->
-		
-		<!-- <tr class="doc_row">
+		{% set i = 1 %}
+		{% for hit in all_hits %}			
+		<tr class="doc_row">
 		    <td>{{i}}</td>
 		    <td>{{ search_index }}</td>
 		    <td>{{ hit['_source']['timestamp'] }}</td>
-		    <td class="sinature">{{ hit['_source']['alert']['signature'] }}</td>
-		    <td>
-			<select>
-			    <option value="yes">yes</option>
-			    <option value="no">no</option>
-			</select>
-		    </td>
-		</tr> -->
-
-		<tr class="doc_row">
-		    <td>1</td>
-		    <td>index-1</td>
-		    <td>now</td>
-		    <td class="signature">A</td>
+		    <td class="signature">{{ hit['_source']['alert']['signature'] }}</td>
 		    <td>
 			<select>
 			    <option value="yes">yes</option>
@@ -57,34 +41,8 @@
 			</select>
 		    </td>
 		</tr>
-
-		<tr class="doc_row">
-		    <td>1</td>
-		    <td>index-1</td>
-		    <td>now</td>
-		    <td class="signature">B</td>
-		    <td>
-			<select>
-			    <option value="yes">yes</option>
-			    <option value="no">no</option>
-			</select>
-		    </td>
-		</tr>
-
-		<tr class="doc_row">
-		    <td>1</td>
-		    <td>index-1</td>
-		    <td>now</td>
-		    <td class="signature">C</td>
-		    <td>
-			<select>
-			    <option value="yes">yes</option>
-			    <option value="no">no</option>
-			</select>
-		    </td>
-		</tr>
-	<!-- 	{% set i= i+1%}
-		{% endfor %} -->
+		{% set i= i+1%}
+		{% endfor %}
 	    </table>
 	</div>
 	<script type="text/javascript">
@@ -99,7 +57,6 @@
 				if ( signature == selectSignature ) {
 					console.log('===');
 					if (self.is(':checked') == true){
-						console.log(1111);
 						$(this).show();
 					}
 					else {
