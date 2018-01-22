@@ -2,9 +2,11 @@
 <html>
 <head>
     <title> Elasticsearch Dashboard </title>
-    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard.css')}}"> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard.css')}}">
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <style>html{font-family: 'PT Sans', sans-serif;}</style>
 </head>
 
 <body ng-app="esApp">
@@ -25,7 +27,7 @@
 		    <th>INDEX</th>
 		    <th>TIMESTAMP</th>
 		    <th>SIGNATURE</th>
-		    <th>ENABLE WARNING</th>
+		    <th>SERVERITY</th>
 		</tr>
 		{% set i = 1 %}
 		{% for hit in all_hits %}			
@@ -34,12 +36,7 @@
 		    <td>{{ search_index }}</td>
 		    <td>{{ hit['_source']['timestamp'] }}</td>
 		    <td class="signature">{{ hit['_source']['alert']['signature'] }}</td>
-		    <td>
-			<select>
-			    <option value="yes">yes</option>
-			    <option value="no">no</option>
-			</select>
-		    </td>
+		    <td>{{ hit['_source']['alert']['severity'] }}</td>
 		</tr>
 		{% set i= i+1%}
 		{% endfor %}

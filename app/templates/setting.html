@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<form method='POST' action=''>
+    <ul>
+	{% for sig in cur_signs %}
+	    <li> {{ Sform.checkField(value='yes', name=sig , id = sig) }} {{ sig }} </li>
+	{% endfor %}
+    </ul>
+    <button type=submit class='btn'>Submit</button>
+</form>
+{% endblock %}

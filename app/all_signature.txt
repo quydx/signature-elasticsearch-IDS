@@ -1,0 +1,21 @@
+ET POLICY Suspicious inbound to MSSQL port 1433
+ET SCAN Potential SSH Scan
+VEGA COIN MINER STRATUM PROTOCOL
+GPL ICMP_INFO PING *NIX
+GPL ICMP_INFO PING BSDtype
+ET POLICY RDP connection confirm
+ET POLICY Python-urllib/ Suspicious User Agent
+GPL SNMP public access udp
+GPL RPC portmap listing UDP 111
+ET SCAN SSH BruteForce Tool with fake PUTTY version
+ET SCAN Behavioral Unusually fast Terminal Server Traffic Potential Scan or Infection (Inbound)
+ET SCAN Sipvicious User-Agent Detected (friendly-scanner)
+ET SCAN Sipvicious Scan
+ET POLICY Suspicious inbound to mySQL port 3306
+ET DOS Possible SSDP Amplification Scan in Progress
+ET POLICY MS Remote Desktop Administrator Login Request
+GPL RPC xdmcp info query
+GPL WEB_SERVER 403 Forbidden
+GPL DNS named version attempt
+ET POLICY Suspicious inbound to PostgreSQL port 5432
+ET DNS Non-DNS or Non-Compliant DNS traffic on DNS port Reserved Bit Set

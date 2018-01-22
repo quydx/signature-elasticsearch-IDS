@@ -33,3 +33,30 @@ ImportError: cannot import name elasticsearch
 192.168.148.103 - - [20/Jan/2018 03:48:03] "GET /static/css/dashboard.css HTTP/1.1" 200 -
 192.168.148.103 - - [20/Jan/2018 03:50:33] "GET / HTTP/1.1" 200 -
 192.168.148.103 - - [20/Jan/2018 03:50:33] "GET /static/css/dashboard.css HTTP/1.1" 200 -
+Traceback (most recent call last):
+  File "run.py", line 1, in <module>
+    from app import app 
+  File "/root/dashboard/app/__init__.py", line 3, in <module>
+    from app import views
+  File "/root/dashboard/app/views.py", line 19
+    {'timestamp:' {'order:' 'desc'}}   
+                  ^
+SyntaxError: invalid syntax
+Traceback (most recent call last):
+  File "run.py", line 1, in <module>
+    from app import app 
+  File "/root/dashboard/app/__init__.py", line 3, in <module>
+    from app import views
+  File "/root/dashboard/app/views.py", line 19
+    {'timestamp:' {'order:' 'desc'}}   
+                  ^
+SyntaxError: invalid syntax
+Traceback (most recent call last):
+  File "run.py", line 1, in <module>
+    from app import app 
+  File "/root/dashboard/app/__init__.py", line 3, in <module>
+    from app import views
+  File "/root/dashboard/app/views.py", line 19
+    {'timestamp:' {'order:' 'desc'}}   
+                  ^
+SyntaxError: invalid syntax
