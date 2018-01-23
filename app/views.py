@@ -3,7 +3,7 @@ from flask import render_template
 import re
 from elasticsearch import Elasticsearch
 from datetime import datetime
-from app import form
+from app.form import SignatureForm
 
 
 @app.route('/', methods = ['GET', 'POST'])
@@ -48,12 +48,11 @@ def index():
 @app.route('/setting', methods=['GET','POST'])
 
 def setting():
+    form = SignatureForm()
     cur_signs = []
     with open('app/all_signature.txt') as f:
 	for line in f:
-	    cur_signs.append(line)
-    Sform = form.SignatureSetting()
-    
+	    cur_signs.append(line.rstrip('\n'))
     return render_template('setting.html', method = ['GET', 'POST'], **locals())
 
 
