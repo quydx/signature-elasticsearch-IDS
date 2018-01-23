@@ -1,2 +1,2 @@
 WTF_CSRF_ENABLE = True
-SECRET_KEY = 'Gbmktzqh1@'
+SECRET_KEY = 'secret***'

@@ -19,3 +19,9 @@ GPL WEB_SERVER 403 Forbidden
 GPL DNS named version attempt
 ET POLICY Suspicious inbound to PostgreSQL port 5432
 ET DNS Non-DNS or Non-Compliant DNS traffic on DNS port Reserved Bit Set
+ET POLICY Incoming Basic Auth Base64 HTTP Password detected unencrypted
+ET DOS DNS Amplification Attack Inbound
+GPL ICMP_INFO PING Flowpoint2200 or Network Management Software
+GPL ICMP_INFO PING BayRS Router
+ET POLICY Outgoing Basic Auth Base64 HTTP Password detected unencrypted
+ET SCAN Non-Allowed Host Tried to Connect to MySQL Server

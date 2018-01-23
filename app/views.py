@@ -1,4 +1,5 @@
 from app import app 
+import flask
 from flask import render_template 
 import re
 from elasticsearch import Elasticsearch
@@ -49,10 +50,19 @@ def index():
 
 def setting():
     form = SignatureForm()
-    cur_signs = []
-    with open('app/all_signature.txt') as f:
-	for line in f:
-	    cur_signs.append(line.rstrip('\n'))
+    if flask.request.method == 'POST':
+	signatures = flask.request.values.getlist('signatures[]')
+	cur_signatures = [ line.rstrip('\n') for line in open('app/signatures_warning')]
+	with open('app/signatures_warning', 'w') as f:
+	    for sig in signatures:
+		f.write("%s\n" % sig )
+	f.close()
+	
+    else:
+	cur_signs = []
+	with open('app/all_signature.txt') as f:
+	    for line in f:
+		cur_signs.append(line.rstrip('\n'))
     return render_template('setting.html', method = ['GET', 'POST'], **locals())
 
 

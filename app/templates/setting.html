@@ -1,9 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-<form method='POST' action=''>
+{% if cur_signs is defined %}
+<form method='POST' action='/setting'>
+    {{ form.hidden_tag() }}
     {% for sig in cur_signs %} 
-    {{ form.signatures(name=sig) }} 
+    <input class="signature_checkbox" type="checkbox" name="signatures[]" value="{{sig}}"> {{sig}} <br /> 
     {% endfor %}
     <button type=submit class='btn'>Submit</button>
 </form>
+{% else %}
+    {% if signatures is defined %}
+	{% for value in signatures %}
+	{{value}}<br />
+	{% endfor %}
+    {% endif %}
+{% endif %}
 {% endblock %}
