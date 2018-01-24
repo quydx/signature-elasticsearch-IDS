@@ -35,7 +35,7 @@ def sendsms(phone_number, content):
 	"sender": "Suricata alert"
 	}  
     str_data = str(data).replace("'", "\"")
-    response = requests.post('http://api.speedsms.vn/index.php/sms/send', headers=headers, data=str_data, auth=(access_token, 'Gbmktzqh1@'))
+    response = requests.post('http://api.speedsms.vn/index.php/sms/send', headers=headers, data=str_data, auth=(access_token, ''))
     return response
 
 def getUserInfo():
