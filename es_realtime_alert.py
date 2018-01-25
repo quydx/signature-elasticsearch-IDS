@@ -53,24 +53,33 @@ if __name__ == '__main__':
     query =  "alert.signature:\"GPL ICMP_INFO PING BSDtype\""
     body1= {
 	"size":2,
+	"sort":[
+	    {
+		"timestamp":{
+		    "order": "desc",
+		    "unmapped_type": "boolean"
+		}	
+	    }  
+	],
 	"query":{
 	    "filtered":{
 		"query":{
 		    "query_string":{
-			"query": "(ET SCAN Potential SSH Scan) OR (GPL RPC portmap listing UDP 111) OR (GPL ICMP_INFO PING BSDtype)",
-			"fields": ["_all"]
+			"query": "(\"ET SCAN Potential SSH Scan\") OR (\"GPL RPC portmap listing UDP 111\") OR (\"GPL ICMP_INFO PING BSDtype\")",
 		    }
-		} 
-	    },
-#	    "query_string":{
-#		"query": "(ET SCAN Potential SSH Scan) OR (GPL RPC portmap listing UDP 111) OR (GPL ICMP_INFO PING BSDtype)",
-#		"fields": ["_all"]
-#	    },
-	    "filter":{
-		"range":{
-		    "timestamp":{
-			"gte":"now-300s"    
-		    }	
+		},
+		"filter":{
+		    "bool":{
+			"must":[
+			    {
+				"range":{
+				    "timestamp":{
+					"gte":"now-300s"    
+				    }	
+				}
+			    }	
+			]    
+		    }
 		}
 	    }
 	}
@@ -82,24 +91,24 @@ if __name__ == '__main__':
 		"filter":{
 		    "range":{
 			"timestamp":{
-			    "gte": "now-30s"	
+			    "gte": "now-300s"	
 			}    
 		    }	
 		},
 		"must":{
 		    "terms":{
 			"alert.signature": ["\"ET SCAN Potential SSH Scan\"", "\"GPL RPC portmap listing UDP 111\"", "\"GPL ICMP_INFO PING BSDtype\""] 
-			#"alert.signature" : "ET SCAN Potential SSH Scan"
+			#"alert.signature" : ["\"ET SCAN Potential SSH Scan\""]
 		    }	
 		}
 	    }   
 	} 	
     }
-    e.real_time_query(
+    res = e.query(
 	index='suricataids-bd-alert-2018.01.25',
 	body=body1
     )
-    """
+    
     signatures=[]
     all_hits = res['hits']['hits']
     time = res['took']
@@ -113,6 +122,5 @@ if __name__ == '__main__':
 	if alert_obj['signature'] not in signatures:
 	    signatures.append(alert_obj['signature'])
     pprint(signatures)
-    """
 
 

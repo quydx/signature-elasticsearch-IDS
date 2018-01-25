@@ -34,11 +34,11 @@ def index():
 	    signatures.append(alert_obj['signature'])
 
     cur_signs = []
-    with open('app/all_signature.txt') as f:
+    with open('app/all_signature') as f:
 	for line in f:
 	    cur_signs.append(line.rstrip('\n'))
      
-    sfile = open('app/all_signature.txt', 'a')
+    sfile = open('app/all_signature', 'a')
     for sig in signatures:
 	if sig not in cur_signs:
 	    sfile.write("%s\n" % sig)
@@ -60,7 +60,7 @@ def setting():
 	
     else:
 	cur_signs = []
-	with open('app/all_signature.txt') as f:
+	with open('app/all_signature') as f:
 	    for line in f:
 		cur_signs.append(line.rstrip('\n'))
     return render_template('setting.html', method = ['GET', 'POST'], **locals())
