@@ -19,7 +19,7 @@ class ESAlert:
 	try:
 	    while True:
 		res = self.es.search(index=index, body=body)
-		print("Find " + len(res['hits']['hits']) + "document .")
+		print("Find %d document ." % len(res['hits']['hits']) )
 		time.sleep(28)
 	except:
 	    print("Realtime query except")
