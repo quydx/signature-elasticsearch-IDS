@@ -88,7 +88,7 @@ if __name__ == '__main__':
 		},
 		"must":{
 		    "terms":{
-			"alert.signature": ["ET SCAN Potential SSH Scan", "GPL RPC portmap listing UDP 111", "GPL ICMP_INFO PING BSDtype"] 
+			"alert.signature": ["\"ET SCAN Potential SSH Scan\"", "\"GPL RPC portmap listing UDP 111\"", "\"GPL ICMP_INFO PING BSDtype\""] 
 			#"alert.signature" : "ET SCAN Potential SSH Scan"
 		    }	
 		}
