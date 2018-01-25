@@ -11,8 +11,8 @@ class Email(object):
 	self.message = message    
     def send_gmail(self):
 	try:
-	    gmail_user = "monitorclipvn@gmail.com"
-	    gmail_pwd = "Rr123456789"
+	    gmail_user = "xxxx"
+	    gmail_pwd = "xxxx"
 	    SUBJECT = "[ATTT] Canh bao Suricata"
 	    TEXT = "\nCanh bao Suricata \n\n"+self.message+"\n\n\n\n"
 	    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
