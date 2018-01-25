@@ -57,10 +57,15 @@ if __name__ == '__main__':
 	    "filtered":{
 		"query":{
 		    "query_string":{
-			"query":query    
-		    }	
-		}  
+			"query": "(ET SCAN Potential SSH Scan) OR (GPL RPC portmap listing UDP 111) OR (GPL ICMP_INFO PING BSDtype)",
+			"fields": ["_all"]
+		    }
+		} 
 	    },
+#	    "query_string":{
+#		"query": "(ET SCAN Potential SSH Scan) OR (GPL RPC portmap listing UDP 111) OR (GPL ICMP_INFO PING BSDtype)",
+#		"fields": ["_all"]
+#	    },
 	    "filter":{
 		"range":{
 		    "timestamp":{
@@ -77,13 +82,14 @@ if __name__ == '__main__':
 		"filter":{
 		    "range":{
 			"timestamp":{
-			    "gte": "now-300s"	
+			    "gte": "now-30s"	
 			}    
 		    }	
 		},
 		"must":{
 		    "terms":{
-			"alert.signature": ["ET SCAN Potential SSH Scan", "GPL RPC portmap listing UDP 111", "GPL ICMP_INFO PING BSDtype"]  
+			"alert.signature": ["ET SCAN Potential SSH Scan", "GPL RPC portmap listing UDP 111", "GPL ICMP_INFO PING BSDtype"] 
+			#"alert.signature" : "ET SCAN Potential SSH Scan"
 		    }	
 		}
 	    }   
@@ -91,7 +97,7 @@ if __name__ == '__main__':
     }
     e.real_time_query(
 	index='suricataids-bd-alert-2018.01.25',
-	body=body2
+	body=body1
     )
     """
     signatures=[]
