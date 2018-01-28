@@ -9,104 +9,63 @@ class ESAlert:
 	self.host = host
 	self.port = port
 	self.es = Elasticsearch([{'host': self.host, 'port' :self.port }])
-    def query(self, index, body):
-	try:
-	   res = self.es.search(index=index, body=body)
-	   return res
-	except:
-	    print "Search ERROR"
-    def real_time_query(self, index, body):
-	try:
-	    while True:
-		res = self.es.search(index=index, body=body)
-		print("Find %d document ." % len(res['hits']['hits']) )
-		time.sleep(28)
-	except:
-	    print("Realtime query except")
 
-if __name__ == '__main__':
-    e = ESAlert('192.168.158.74', 9200)
-    body={
-	"size":2,
-	"query": {
-	    "filtered": {
-		"filter": {
-		    "and": [
-			{
-			    "range": {
-				"gt": "now-30s"    
-			    }
-			},
-			{
-			    "term": {
-				"count": 1    
-			    }	
-			}
-		    ]	
+    def query(self, index, signature_list, interval):
+	query = ""
+	for signature in signature_list:
+	    query += "(\"%s\")" % signature
+	    query += " OR "
+	query = query.rstrip(" OR ")
+	print("\"%s\"" %query)
+	
+	body= {
+	    "size":500,
+	    "sort":[
+		{
+		    "timestamp":{
+			"order": "desc",
+			"unmapped_type": "boolean"
+		    }	
 		}  
-	    },
-	},
-	"sort":[
-	    {"timestamp": {"order": "desc"}}
-	]
-    }
-    query =  "alert.signature:\"GPL ICMP_INFO PING BSDtype\""
-    body1= {
-	"size":2,
-	"sort":[
-	    {
-		"timestamp":{
-		    "order": "desc",
-		    "unmapped_type": "boolean"
-		}	
-	    }  
-	],
-	"query":{
-	    "filtered":{
-		"query":{
-		    "query_string":{
-			"query": "(\"ET SCAN Potential SSH Scan\") OR (\"GPL RPC portmap listing UDP 111\") OR (\"GPL ICMP_INFO PING BSDtype\")",
-		    }
-		},
-		"filter":{
-		    "bool":{
-			"must":[
-			    {
-				"range":{
-				    "timestamp":{
-					"gte":"now-300s"    
-				    }	
-				}
-			    }	
-			]    
+	    ],
+	    "query":{
+		"filtered":{
+		    "query":{
+			"query_string":{
+			    "query": query,
+			}
+		    },
+		    "filter":{
+			"bool":{
+			    "must":[
+				{
+				    "range":{
+					"timestamp":{
+					    "gte":"now-%ds"%interval    
+					}	
+				    }
+				}	
+			    ]    
+			}
 		    }
 		}
 	    }
 	}
-    }
-    body2= {
-	"size":1,
-	"query": {
-	    "bool":{
-		"filter":{
-		    "range":{
-			"timestamp":{
-			    "gte": "now-300s"	
-			}    
-		    }	
-		},
-		"must":{
-		    "terms":{
-			"alert.signature": ["\"ET SCAN Potential SSH Scan\"", "\"GPL RPC portmap listing UDP 111\"", "\"GPL ICMP_INFO PING BSDtype\""] 
-			#"alert.signature" : ["\"ET SCAN Potential SSH Scan\""]
-		    }	
-		}
-	    }   
-	} 	
-    }
-    res = e.query(
-	index='suricataids-bd-alert-2018.01.25',
-	body=body1
+	#pprint(body)
+	try:
+	    res = self.es.search(index=index, body=body)
+	    return res
+	except:
+	    print("Query Except ")
+
+if __name__ == '__main__':
+    e = ESAlert('192.168.158.74', 9200)
+    query =  "alert.signature:\"GPL ICMP_INFO PING BSDtype\""
+    #signature_list = ["ET SCAN Potential SSH Scan","GPL RPC portmap listing UDP 111","GPL ICMP_INFO PING BSDtype"]
+    signature_list = [signature.rstrip("\n") for signature in open('app/signatures_warning')]
+    res  = e.query(
+	index='suricataids-bd-alert-2018.01.28',
+	signature_list = signature_list
     )
     
     signatures=[]
@@ -116,11 +75,15 @@ if __name__ == '__main__':
     print("Get total %d document from elasticsearch" % len(all_hits) )
     
     pprint(all_hits)
-    
+    """
     for hit in all_hits:
 	alert_obj = hit['_source']['alert']
 	if alert_obj['signature'] not in signatures:
 	    signatures.append(alert_obj['signature'])
     pprint(signatures)
+
+    """
+
+
 
 
