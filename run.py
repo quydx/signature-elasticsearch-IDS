@@ -10,34 +10,38 @@ import time
 
 
 def httpServer(): 
-    app.run(host='0.0.0.0', port=80, debug=True)  
+    app.run(host='0.0.0.0', port=80, debug=True) 
+
 def suricataAlert():
     alert = ESAlert('192.168.158.74', 9200)
-    pprint(alert)
     index='suricataids-bd-alert-'+ datetime.now().strftime("%Y.%m.%d")
-    print(index)
+    email = Email()
+    sms = SMS()
+    phones = ['01202996807']
+    message = "ATTT Suricata Alert \n"
+    rcv_list = ['quy196hp@gmail.com']
     while True:
 	signature_list = [signature.rstrip("\n") for signature in open('app/signatures_warning')]
-	print(signature_list) 
-	res = alert.query(index=index, signature_list = signature_list, interval=30)
-	leng = len(res['hits']['hits'])
-	if leng > 0:
-	    print('find %d alert warning' % leng)
-	time.sleep(28)
-
-
-
+	for sign in signature_list :
+	    res = alert.query(index=index, signature_list = [sign], interval=300)
+	    all_hits = res['hits']['hits']
+	    leng = len(all_hits)
+	    list_src_ip = []
+	    if leng > 0:
+		for hit in all_hits:
+		    ip = hit['_source']['src_ip']
+		    if ip not in list_src_ip:
+			list_src_ip.append(ip)
+		ip_list = ",".join(ip for ip in list_src_ip)
+		message += "%s :%s: %d hits :source ip %s\n" %(all_hits[0]['_source']['timestamp'], sign , leng, ip_list)
+	print(message)
+	break
+	#email.send_gmail(rcv_list, message)
+	#sms.sendsms(phones, message)
+	#time.sleep(295)
+	
 if __name__ == '__main__': 
-    try:
-	#suricataAlert()
-	#web_thread = threading.Thread(target = httpServer, args=())
-	#web_thread.start()
-	alert_thread = threading.Thread(target = suricataAlert, args=()) 
-	alert_thread.start()
-	httpServer()
-    except:
-	print "ERROR in main"
-#    sms = SMS()
-#    phones = ['01202996807']
-#    res =  sms.sendsms(phones,'naaaaaaaaaaaa')
-#    print(res.json())
+    #suricataAlert()
+    #alert_thread = threading.Thread(target = suricataAlert, args=()) 
+    #alert_thread.start()
+    httpServer()

@@ -29,7 +29,6 @@ def index():
     total = len(all_hits)
     for hit in all_hits:
 	alert_obj = hit['_source']['alert']
-	#print("Signature = %s"% alert_obj['signature'])
 	if alert_obj['signature'] not in signatures:
 	    signatures.append(alert_obj['signature'])
 
@@ -52,17 +51,17 @@ def setting():
     form = SignatureForm()
     if flask.request.method == 'POST':
 	signatures = flask.request.values.getlist('signatures[]')
-	cur_signatures = [ line.rstrip('\n') for line in open('app/signatures_warning')]
 	with open('app/signatures_warning', 'w') as f:
 	    for sig in signatures:
 		f.write("%s\n" % sig )
 	f.close()
 	
     else:
-	cur_signs = []
+	cur_signatures = [ line.rstrip('\n') for line in open('app/signatures_warning')]
+	all_signatures = []
 	with open('app/all_signature') as f:
 	    for line in f:
-		cur_signs.append(line.rstrip('\n'))
+		all_signatures.append(line.rstrip('\n'))
     return render_template('setting.html', method = ['GET', 'POST'], **locals())
 
 

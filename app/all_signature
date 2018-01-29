@@ -29,3 +29,8 @@ ET INFO Noction IRP Probe
 GPL POLICY PCAnywhere server response
 ET POLICY Outdated Flash Version M1
 VEGA DOS TCP TRACK BY DST CLIPVN LEVEL 1
+ET WEB_SPECIFIC_APPS Possible Apache Struts OGNL Expression Injection (CVE-2017-5638) M2
+ET WEB_SPECIFIC_APPS Possible Apache Struts OGNL Expression Injection (CVE-2017-5638) M3
+ET WEB_SPECIFIC_APPS Possible Apache Struts OGNL Expression Injection (CVE-2017-5638)
+ET VOIP Modified Sipvicious Asterisk PBX User-Agent
+ET SCAN Potential VNC Scan 5900-5920

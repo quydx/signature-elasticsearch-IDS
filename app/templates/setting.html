@@ -1,9 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-{% if cur_signs is defined %}
+{% if cur_signatures is defined %}
+    <h4> Current Signature Setting</h4>
+    <ul>
+	{% for cs in cur_signatures %}
+	<li>{{ cs }}</li>
+	{% endfor %}
+    </ul>
+{% endif %}
+<hr />
+<h4> Enable warning signature</h4>
+{% if all_signatures is defined %}
 <form method='POST' action='/setting'>
     {{ form.hidden_tag() }}
-    {% for sig in cur_signs %} 
+    {% for sig in all_signatures %} 
     <input class="signature_checkbox" type="checkbox" name="signatures[]" value="{{sig}}"> {{sig}} <br /> 
     {% endfor %}
     <button type=submit class='btn'>Submit</button>
