@@ -34,3 +34,11 @@ ET WEB_SPECIFIC_APPS Possible Apache Struts OGNL Expression Injection (CVE-2017-
 ET WEB_SPECIFIC_APPS Possible Apache Struts OGNL Expression Injection (CVE-2017-5638)
 ET VOIP Modified Sipvicious Asterisk PBX User-Agent
 ET SCAN Potential VNC Scan 5900-5920
+GPL WEB_SERVER .htaccess access
+ET MALWARE Suspected PUP/PUA User-Agent (OSSProxy)
+ET SCAN Multiple MySQL Login Failures Possible Brute Force Attempt
+ET POLICY Outdated Flash Version M2
+ET WEB_SERVER Script tag in URI Possible Cross Site Scripting Attempt
+ET POLICY Suspicious inbound to Oracle SQL port 1521
+ET CURRENT_EVENTS Possible OpenSSL HeartBleed Large HeartBeat Response from Common SSL Port (Outbound from Server)
+ET SCAN Potential VNC Scan 5800-5820

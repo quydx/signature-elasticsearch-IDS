@@ -16,7 +16,6 @@ class ESAlert:
 	    query += "(\"%s\")" % signature
 	    query += " OR "
 	query = query.rstrip(" OR ")
-	#print("\"%s\"" %query)
 	
 	body= {
 	    "size":500,

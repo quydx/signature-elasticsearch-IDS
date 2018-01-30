@@ -4,26 +4,37 @@ from flask import render_template
 import re
 from elasticsearch import Elasticsearch
 from datetime import datetime
-from app.form import SignatureForm
+from app.form import *
 
 
 @app.route('/', methods = ['GET', 'POST'])
-@app.route('/index') 
+@app.route('/index', methods = ['GET', 'POST']) 
 
 def index():
+    interval = 900
+    if flask.request.method == 'POST':
+	interval = int(flask.request.values.get('time-query'))
+    form = TimeForm()
+
     es = Elasticsearch(['192.168.158.74:9200']) 
     search_index="suricataids-bd-alert-" + datetime.now().strftime('%Y.%m.%d')
     res = es.search(index=search_index,
 	    body={
+		'size': 500,
 		'query': {
-		    'match_all': {}
+		    "range":{
+			"timestamp":{
+			    "gte":"now-%ds"%interval
+			}	
+		    }
+		    
 		},
 		'sort': [
 		    {'timestamp': {'order': 'desc'}}   
 		]
-	    },
-	    size=500
+	    }
 	    )
+
     signatures=[]
     all_hits = res['hits']['hits']
     total = len(all_hits)

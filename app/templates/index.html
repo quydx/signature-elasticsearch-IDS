@@ -12,7 +12,20 @@
 <body ng-app="esApp">
     <h2> Elasticsearch Sinature Dashboard</h2>
     <div ng-controller="selectCtrl">
-	    Get {{total}} document from index {{ search_index }}
+	{% if interval %}
+	    Last {{ interval/60 }}m
+	{% endif %}
+	Get {{total}} document from index {{ search_index }} 
+	    <form method='POST' action='/index'>
+		{{ form.hidden_tag() }}
+		<h4>
+		    <select name="time-query">
+			<option value="3600">Last 1 hour</option>
+			<option value="900">Last 15 minute</option>
+		    </select>
+		    <button type="submit">Submit</button>
+		</h4>
+	    </form>
 	    <h4>Select sinature display</h4>
 	    <ul>
 		{% for sig in signatures  %}

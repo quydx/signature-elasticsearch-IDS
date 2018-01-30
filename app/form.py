@@ -7,7 +7,8 @@ from pprint import pprint
 class SignatureForm(FlaskForm):
     """Signature Form Class """
     signatures = FieldList(BooleanField(''), min_entries=1)
-
+class TimeForm(FlaskForm):
+    pass
 if __name__ == '__main__':
     print('hello')
 
