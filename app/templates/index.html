@@ -13,24 +13,36 @@
     <h2> Elasticsearch Sinature Dashboard</h2>
     <div ng-controller="selectCtrl">
 	{% if interval %}
-	    Last {{ interval/60 }}m
+	Last {{ interval/60 }}minute(s) <br />
 	{% endif %}
 	Get {{total}} document from index {{ search_index }} 
 	    <form method='POST' action='/index'>
 		{{ form.hidden_tag() }}
 		<h4>
-		    <select name="time-query">
+		    <select name="time-query" class="select-style">
 			<option value="3600">Last 1 hour</option>
-			<option value="900">Last 15 minute</option>
+			<option value="900" selected>Last 15 minute</option>
 		    </select>
-		    <button type="submit">Submit</button>
+		    <span> Select severity </span>
+		    <select name="severity-query" class="select-style">
+			<option value="0"> All</option>
+			{% for i in range(7) %}
+			<option value="{{i + 1}}">{{i + 1}}</option>
+			{% set i = i+1 %}
+			{% endfor %}
+		    </select>
+		    <button type="submit">Get data</button>
 		</h4>
 	    </form>
 	    <h4>Select sinature display</h4>
 	    <ul>
 		{% for sig in signatures  %}
 		<li>
-		    <input class="sinature_select" type="checkbox" name="{{sig}}"><span>{{sig}}</span> 
+		    <label class="checkbox_container">
+			<input class="sinature_select" type="checkbox" name="{{sig['signature']}}">
+			<span class="checkbox_value">{{ sig['count']}} hits :<b>{{sig['signature']}}</b> (Serverity {{ sig['severity']}} )</span>
+			<span class="checkmark"></span>
+		    </label>
 		</li>
 		{% endfor %}
 	    </ul>
@@ -41,6 +53,8 @@
 		    <th>TIMESTAMP</th>
 		    <th>SIGNATURE</th>
 		    <th>SERVERITY</th>
+		    <th>SRC</th>
+		    <th>DST</th>
 		</tr>
 		{% set i = 1 %}
 		{% for hit in all_hits %}			
@@ -50,6 +64,8 @@
 		    <td>{{ hit['_source']['timestamp'] }}</td>
 		    <td class="signature">{{ hit['_source']['alert']['signature'] }}</td>
 		    <td>{{ hit['_source']['alert']['severity'] }}</td>
+		    <td>{{ hit['_source']['src_ip'] }}:{% if hit['_source']['src_ip'] is defined %} {{ hit['_source']['src_port'] }} {% endif %}</td>
+		    <td>{{ hit['_source']['dest_ip'] }}:{% if hit['_source']['src_ip'] is defined %} {{ hit['_source']['dest_port'] }} {% endif %}</td>
 		</tr>
 		{% set i= i+1%}
 		{% endfor %}
