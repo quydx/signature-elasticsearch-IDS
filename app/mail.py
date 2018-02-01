@@ -8,7 +8,7 @@ import os
 class Email():
     def send_gmail(self, rcv_list , message):
 	gmail_user = "quy196hp8@gmail.com"
-	gmail_pwd = "gbmktzqh"
+	gmail_pwd = "*****"
 	SUBJECT = "[ATTT] Canh bao Suricata"
 	TEXT = "\nCanh bao Suricata \n\n"+message+"\n\n\n\n"
 	server = smtplib.SMTP_SSL('smtp.gmail.com', 465)

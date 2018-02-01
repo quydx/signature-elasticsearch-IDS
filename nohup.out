@@ -67,3 +67,7 @@ SyntaxError: invalid syntax
 192.168.42.75 - - [01/Feb/2018 08:05:31] "POST /index HTTP/1.1" 200 -
 192.168.42.75 - - [01/Feb/2018 08:05:31] "GET /static/css/dashboard.css HTTP/1.1" 304 -
 192.168.42.75 - - [01/Feb/2018 08:05:31] "GET /static/css/img/icon-select.png HTTP/1.1" 404 -
+ * Detected change in '/root/dashboard/app/mail.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 711-845-212
