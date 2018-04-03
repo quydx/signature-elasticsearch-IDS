@@ -14,7 +14,7 @@
 <form method='POST' action='/setting'>
     {{ form.hidden_tag() }}
     {% for sig in all_signatures %} 
-    <input class="signature_checkbox" type="checkbox" name="signatures[]" value="{{sig}}"> {{sig}} <br /> 
+    <input class="signature_checkbox" type="checkbox" name="signatures[]" value="{{ sig }}"> {{sig}} <br />
     {% endfor %}
     <button type=submit class='btn'>Submit</button>
 </form>
